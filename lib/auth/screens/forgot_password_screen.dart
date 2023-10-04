@@ -1,3 +1,4 @@
+import 'package:firebase/auth/widgets/textfield_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -26,7 +27,6 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
         "Sent you password reset email! check it",
       );
     } on FirebaseAuthException catch (e) {
-      print(e);
       _showDialog(e.toString());
     }
   }
@@ -68,28 +68,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
             const SizedBox(
               height: 50,
             ),
-            Container(
-              decoration: BoxDecoration(
-                  color: Colors.grey.shade200,
-                  border: Border.all(
-                    color: Colors.white,
-                  ),
-                  borderRadius: BorderRadius.circular(
-                    12,
-                  )),
-              child: Padding(
-                padding: const EdgeInsets.only(
-                  left: 20,
-                ),
-                child: TextField(
-                  controller: _emailController,
-                  decoration: const InputDecoration(
-                    border: InputBorder.none,
-                    hintText: "Email",
-                  ),
-                ),
-              ),
-            ),
+            TextfieldWidget(controller: _emailController, hintText: "email"),
             const SizedBox(
               height: 20,
             ),

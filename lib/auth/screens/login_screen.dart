@@ -1,4 +1,6 @@
 import 'package:firebase/auth/screens/forgot_password_screen.dart';
+import 'package:firebase/auth/screens/signup_screen.dart';
+import 'package:firebase/auth/widgets/textfield_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -27,6 +29,14 @@ class _LoginScreenState extends State<LoginScreen> {
     _emailController.dispose();
     _passwordController.dispose();
     super.dispose();
+  }
+
+  void _onRegister() {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => const SignupScreen(),
+      ),
+    );
   }
 
   void _onForgotPassword() {
@@ -95,54 +105,13 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SizedBox(
                     height: 50,
                   ),
-                  Container(
-                    decoration: BoxDecoration(
-                        color: Colors.grey.shade200,
-                        border: Border.all(
-                          color: Colors.white,
-                        ),
-                        borderRadius: BorderRadius.circular(
-                          12,
-                        )),
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                        left: 20,
-                      ),
-                      child: TextField(
-                        controller: _emailController,
-                        decoration: const InputDecoration(
-                          border: InputBorder.none,
-                          hintText: "Email",
-                        ),
-                      ),
-                    ),
-                  ),
+                  TextfieldWidget(
+                      controller: _emailController, hintText: "email"),
                   const SizedBox(
                     height: 10,
                   ),
-                  Container(
-                    decoration: BoxDecoration(
-                        color: Colors.grey.shade200,
-                        border: Border.all(
-                          color: Colors.white,
-                        ),
-                        borderRadius: BorderRadius.circular(
-                          12,
-                        )),
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                        left: 20,
-                      ),
-                      child: TextField(
-                        obscureText: true,
-                        controller: _passwordController,
-                        decoration: const InputDecoration(
-                          border: InputBorder.none,
-                          hintText: "Password",
-                        ),
-                      ),
-                    ),
-                  ),
+                  TextfieldWidget(
+                      controller: _passwordController, hintText: "password"),
                   const SizedBox(
                     height: 20,
                   ),
@@ -197,20 +166,23 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SizedBox(
                     height: 10,
                   ),
-                  const Row(
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
+                      const Text(
                         "Not a memeber? ",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      Text(
-                        "Register Now",
-                        style: TextStyle(
-                          color: Colors.blue,
-                          fontWeight: FontWeight.bold,
+                      GestureDetector(
+                        onTap: _onRegister,
+                        child: const Text(
+                          "Register Now",
+                          style: TextStyle(
+                            color: Colors.blue,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ],
